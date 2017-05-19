@@ -1,0 +1,20 @@
+<ons-page>
+<ons-toolbar-button ui-sref="home" style="color: white;">
+	<ons-icon icon="ion-chevron-left"></ons-icon>
+	
+</ons-toolbar-button>
+	</br>
+	</br>
+	<div style="color:white; text-align: center;"><h2 style="font-family: futura;">Latest Story</h2></div>
+</br>
+	
+	</br>
+	<div style="color:white; text-align: center; font-family: futura;">
+		Story: {{story}}
+	</div>
+	<div style="color:white; text-align: center; font-family: futura;">
+		<p>Created by: </p><p ng-repeat="user in Users">{{user}}</p>
+	</div>
+
+
+</ons-page>

@@ -1,0 +1,66 @@
+<ons-page>
+	<ons-toolbar modifier="transparent">
+		<div class="left">
+			<ons-toolbar-button style="color: white;">
+				{{currentUser.username}}
+			</ons-toolbar-button>
+		</div>
+		<div class="center" ui-sref="home" style="color: white; font-family: futura;">Map Story</div>
+	</ons-toolbar>
+
+		<ons-list style="background-color: rgba(255,255,255, 0.8);">
+			<ons-list-header style="background-color: rgba(255, 255, 255);">Create Game</ons-list-header>
+			
+			<ons-list-item>
+				<div class="left" style="font-family: futura;">Name Your Game</div>
+				<input class="text-input" ng-model="gameName" placeholder="Write here"></input>
+			</ons-list-item>
+
+			<ons-list-item>
+				<div class="left" style="font-family: futura;">Number of players:</div>
+				<select class="select-input" ng-model="numPlayers">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>
+			</ons-list-item>
+
+			<ons-list-item>
+				<div class="left" style="font-family: futura;">Number of words:</div>
+				<select class="select-input" ng-model="numWords">
+					<option value="1">10</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+					<option value="200">200</option>
+					<option value="500">500</option>
+				</select>
+			</ons-list-item>
+
+			<ons-list-item>
+				<div class="left" style="font-family: futura;">Range:</div>
+				<select class="select-input" ng-model="range">
+					<option value="5">10 m</option>
+					<option value="4">100 m</option>
+					<option value="3">1000 m</option>
+				</select>
+			</ons-list-item>
+
+			<ons-list-item>
+				<div class="left" style="font-family: futura;">Game Password:</div>
+				<input class="text-input" id="gamePassword" ng-model="gamePassword" placeholder="Write here"></input>
+			</ons-list-item>
+
+		</ons-list>
+
+		<ons-button class="button--large--cta" ng-click="createGame(gameName,numPlayers,numWords,range,gamePassword)" style="width: 50%; margin: 0 auto; background-color: rgba(30,144,200, 0.7); font-family: futura;">Create Game</ons-button>
+
+		
+
+</ons-page>

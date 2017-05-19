@@ -1,0 +1,31 @@
+<ons-page>
+	<ons-toolbar modifier="transparent">
+		<div class="left">
+			<ons-toolbar-button ui-sref="home" style="color: white;">
+				<ons-icon icon="ion-chevron-left"></ons-icon>
+			</ons-toolbar-button>
+		</div>
+		{{getUsers()}}
+		<div class="center" style="color: white; font-family: futura;">Map Story</div>
+	</ons-toolbar>
+	
+	<ons-list style="background-color: rgba(255, 255, 255, 0);" modifier="noborder">
+		<ons-list-header style="background-color: rgba(255, 255, 255, 0);"><p style="color: white; font-family: futura;">Info</p>
+		</ons-list-header>
+			<p style="color: white; font-family: futura; margin-left: 15px;">User: {{username}}</p>
+
+			<!--<p style="color: white; font-family: futura; margin-left: 15px;">Amount of players in your area: {{users.length}} </p>-->
+	
+		{{checkgame()}}
+
+		<ons-list-header style="background-color: rgba(255, 255, 255, 0);"><p style="color: white; font-family: futura;">Current position</p>
+		</ons-list-header>
+		<ons-list-item>
+			<div class="list-item__center" id="map" style="height: 50%; margin-right:12px;"></div>
+		</ons-list-item>
+	</ons-list>
+	
+	</br>
+	<ons-button ui-sref="chat" ng-click="getUsers()" class="button--large--cta" style="width: 50%; margin: 0 auto;background-color: rgba(30,144,200, 0.7); font-family: futura;">Join game room!</ons-button>
+	
+</ons-page>
