@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!--Stylesheets-->
+		<link rel="stylesheet" href="bower_components/onsenui/css/onsenui.css"/>
+	    <link rel="stylesheet" href="bower_components/onsenui/css/onsen-css-components.css"/>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	    <link rel="stylesheet" href="index.css"/>
+	    <!--MobileTags-->
+		<meta name="viewport" content="width=device-width, user-scalable=no
+			initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+		<!--Title-->
+		<title>mapStory</title>
+		<!--Logging for Evothings-->
+		<script>
+			//Redirect console.log to Evothings Workbench.
+			if (window.hyper && window.hyper.log) { console.log = hyper.log }
+		</script>
+	    <!--Angular-->
+	    <script src="bower_components/angular/angular.js"></script>
+	    <!--Onsen UI-->
+	    <script src="bower_components/onsenui/js/onsenui.js"></script>
+	    <script src="bower_components/onsenui/js/angular-onsenui.js"></script>
+	    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	    <!--GoogleMaps-->
+		<script src="https://maps.google.com/maps/api/js?key=AIzaSyD9J-7Yn5KXgyr0aXAci0T3Gvk4QlahzQY"></script>
+		<!--Pubnub-->
+		<script src="bower_components/pubnub/dist/web/pubnub.js"></script>
+		<script src="bower_components/pubnub-angular/dist/pubnub-angular.js"></script>
+		<!-- AngularFire -->
+		<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+		<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+		<!--Cordova-->
+		<!--<script src="cordova.js"></script>-->
+		<!--App.js-->
+		<script src="js/app.js"></script>
+		<script src="js/loginService.js"></script>
+		<script src="js/gameModel.js"></script>
+		<script src="js/controllers/loginCtrl.js"></script>
+		<script src="js/controllers/chatCtrl.js"></script>
+		<script src="js/controllers/homeCtrl.js"></script>
+		<script src="js/controllers/setGameCtrl.js"></script>
+	</head>
+	<body ng-app="mapStory" ui-view>
+		<script>
+			// Initialize Firebase
+			var config = {
+			apiKey: "AIzaSyA8B69VeC4pxK8BW0189HWEcliOaSpB37k",
+			authDomain: "mapstory-f2ec2.firebaseapp.com",
+			databaseURL: "https://mapstory-f2ec2.firebaseio.com",
+			projectId: "mapstory-f2ec2",
+			storageBucket: "mapstory-f2ec2.appspot.com",
+			messagingSenderId: "763382370568"
+			};
+			firebase.initializeApp(config);
+		</script>
+	</body>
+</html>

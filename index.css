@@ -1,0 +1,42 @@
+body {
+	
+}
+
+div {
+	color:white;
+}
+
+#icon {
+	margin-top: 2em;
+	margin-right: 1em;
+	color:white;
+	font-size: 1.5em;
+}
+
+
+/* Top Chat */
+
+#chatTop {
+	height:10%; 
+}
+
+/*Message room*/
+
+#messageRoom {
+	height: 80%;
+}
+
+/*Bottom Chat*/
+
+#chatBottom {
+	height: 10%;
+}
+
+#messageField {
+	color: black;
+	border-radius: 10px; 
+	border: 1px solid white; 
+	outline: none; 
+	padding-left: 1em;
+}
+

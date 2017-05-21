@@ -1,0 +1,51 @@
+<ons-page>
+	<ons-toolbar modifier="transparent">
+		<div class="left">
+			<ons-toolbar-button style="color: white;">
+				{{currentUser.username}}
+			</ons-toolbar-button>
+		</div>
+		<div class="center" ui-sref="home" ng-click="quitGame()" style="color: white; font-family: futura;">Map Story</div>
+	</ons-toolbar>
+		{{getUsers()}}
+		<ons-list style="background-color: rgba(255, 255, 255, 0);">
+			<ons-list-header style="background-color: rgba(255, 255, 255);">Story</ons-list-header>
+			<ons-list-item style="height: 150px; color: white;">
+				{{game.story}}
+			</ons-list-item>
+		</ons-list>
+		<ons-list style="background-color: rgba(255, 255, 255, 0);">
+			<ons-list-header style="background-color: rgba(255, 255, 255);">Info</ons-list-header>
+			<ons-list-item>
+				<div class="left" style="color: white; font-family: futura;" ng-repeat="player in onlineUsers track by $index">{{player.uuid}}</div>
+			</ons-list-item>
+			<ons-list-item>
+				
+				<div class="left" style="color: white; font-family: futura;">Last contributor: {{game.lastUser}}</div>
+				<div class="right" style="color: white; font-family: futura; padding-right: 1em;">Rounds: {{game.round}}/{{game.numWords}}</div>
+			</ons-list-item>
+		</ons-list>
+		<ons-list style="background-color: rgba(255, 255, 255, 0.8);">
+			<ons-list-header style="background-color: rgba(255, 255, 255);">Host</ons-list-header>
+			<ons-list-item>
+				<div class="left">
+					{{game.host}}
+				</div>
+			</ons-list-item>
+		</ons-list>
+		</br>
+		</br>
+		<ons-list style="background-color: rgba(255, 255, 255, 0.8);">
+			<ons-list-header style="background-color: rgba(255, 255, 255);">Word input</ons-list-header>
+			<ons-list-item>
+			<ons-input modifier="transparent" id="messageField" placeholder="Write here"></ons-input>
+				<div class="right">
+					<ons-button ng-click="sendMessage()" style="background-color: rgba(30, 144,200, 0.7); font-family: futura;">Send</ons-button>
+				</div>
+			</ons-list-item>
+		</ons-list>
+		</br>
+		</br>
+		
+
+</ons-page>

@@ -1,0 +1,19 @@
+<ons-page>
+	{{createMap()}}
+	<ons-toolbar modifier="transparent">
+		<div class="left">
+			<ons-toolbar-button style="color: white;">
+				{{currentUser.username}}
+			</ons-toolbar-button>
+		</div>
+		<div class="center" ui-sref="home" style="color: white; font-family: futura;">Map Story</div>
+		<div class="right" style="color: white; font-family: futura;">
+			<a href="" id="icon" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span></a>
+		</div>
+	</ons-toolbar>
+	
+	<div class="list-item__center" id="map" style="height: 87%;"></div>
+
+	</br>
+	<ons-button ng-click="setGame()" class="button--large--cta" style="width: 80%; margin: 0 auto;background-color: rgba(30,144,200, 0.7); font-family: futura;">Start your own game!</ons-button>
+</ons-page>
