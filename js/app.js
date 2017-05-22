@@ -41,6 +41,11 @@ mapStory.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'partials/setGame.html',
         controller: 'setGameCtrl'
       }).
+      state('search', {
+        url: '/search',
+        templateUrl: 'partials/search.html',
+        controller: 'searchCtrl'
+      }).
       state('game/:id', {
         url: '/game/:id',
         templateUrl: 'partials/game.html',

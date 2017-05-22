@@ -169,6 +169,29 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
     		$window.location.href = '#!/home')
 			
 	},
+	//User search
+	userSearch: function(name) {
+      var users = $firebaseArray(ref);
+      users.$loaded().then(function(ref){
+        	for (var profile in ref) {
+        		if (ref[profile].username == name) {
+        			$rootScope.selUser = ref[profile];
+        		}
+        	}
+          })
+    },
+    //Game search
+    gameSearch: function(gameName) {
+      var searchGames = $firebaseArray(gameRef);
+      searchGames.$loaded().then(function(ref){
+        	for (var game in ref) {
+        		if (ref[game].name == gameName) {
+        			console.log(ref[game]);
+        			$rootScope.selGame = ref[game];
+        		}
+        	}
+          })
+    },
     //require Authentication
 	requireAuth: function() {
       return auth.$requireSignIn();
