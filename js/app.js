@@ -1,4 +1,4 @@
-var mapStory = angular.module('mapStory',['ui.router', "pubnub.angular.service", "firebase"]);
+var mapStory = angular.module('mapStory',['onsen', 'ui.router', "pubnub.angular.service", "firebase"]);
 mapStory.value('currentUser', Math.random().toString(36).substring(7));
 
 mapStory.run(function($rootScope, Pubnub, currentUser, $firebaseObject, $window) {
@@ -41,15 +41,20 @@ mapStory.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'partials/setGame.html',
         controller: 'setGameCtrl'
       }).
-      state('search', {
-        url: '/search',
-        templateUrl: 'partials/search.html',
-        controller: 'searchCtrl'
-      }).
       state('game/:id', {
         url: '/game/:id',
         templateUrl: 'partials/game.html',
         controller: 'chatCtrl'
+      }).
+      state('profile', {
+        url: '/profile',
+        templateUrl: 'partials/profilePage.html',
+        controller: 'profileCtrl'
+      }).
+      state('search', {
+        url: '/search',
+        templateUrl: 'partials/search.html',
+        controller: 'searchCtrl'
       })
       $urlRouterProvider.
       otherwise("/login", {

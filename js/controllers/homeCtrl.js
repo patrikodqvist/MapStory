@@ -2,6 +2,21 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 	$rootScope.playSound = false;
 	$rootScope.inGame = false;
 	$rootScope.Playing =false;
+
+	$scope.home = function() {
+		$window.location.href = "#!/home";
+	}
+	$scope.yo = function() {
+		$window.location.href = "#!/profile";
+	}
+	$scope.search = function() {
+		$window.location.href = "#!/search";
+	}
+
+	$scope.splitter = function() {
+		  var menu = document.getElementById('menu');
+		  menu.open();
+	}
 	// Send the user to setGamePage
 	$scope.setGame = function() {
 		$scope.marker.setMap(null);	

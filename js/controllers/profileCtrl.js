@@ -1,18 +1,14 @@
-mapStory.controller('searchCtrl', function($window,$rootScope,$scope, Pubnub, currentUser, loginService, gameModel, firebase, $interval) {
-	$scope.searchInfo = function(name) {
-		
-		loginService.userSearch(name);
-		loginService.gameSearch(name);
-	}
+mapStory.controller('profileCtrl', function($window,$rootScope,$scope, Pubnub, currentUser, loginService, gameModel, firebase, $interval) {	
+	$rootScope.playSound = false;
+	$rootScope.inGame = false;
+	$rootScope.Playing =false;
 
-	$scope.home = function() {
+	$scope.yo = function() {
 		$window.location.href = "#!/home";
 	}
-
 	$scope.profile = function() {
 		$window.location.href = "#!/profile";
 	}
-
 	$scope.search = function() {
 		$window.location.href = "#!/search";
 	}
@@ -21,5 +17,4 @@ mapStory.controller('searchCtrl', function($window,$rootScope,$scope, Pubnub, cu
 		  var menu = document.getElementById('menu');
 		  menu.open();
 	}
-
-});	
+});

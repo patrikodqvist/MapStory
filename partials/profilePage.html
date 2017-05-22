@@ -1,4 +1,3 @@
-
 <ons-splitter>
 	<ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
 		<ons-page>
@@ -14,7 +13,7 @@
 				<ons-list-header>
 					Pages
 				</ons-list-header>
-				<ons-list-item ng-click="home()" tappable>
+				<ons-list-item ng-click="yo()" tappable>
 					<p style="color: black; font-family: futura;">Home</p>
 				</ons-list-item>
 				<ons-list-item ng-click="profile()" tappable>
@@ -52,10 +51,10 @@
 			</ons-list>
 		</ons-page>
 	</ons-splitter-side>
-	<ons-splitter-content id="content" page="search.html"></ons-splitter-content>
+	<ons-splitter-content id="content" page="profile.html"></ons-splitter-content>
 </ons-splitter>
 
-<ons-template id="search.html">
+<ons-template id="profile.html">
 	<ons-page>
 		<ons-toolbar modifier="transparent">
 			<div class="left">
@@ -70,41 +69,23 @@
 				</ons-toolbar-button>
 			</div>
 		</ons-toolbar>
-		</br>
-		</br>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-			Search
-			</ons-list-header>
-			<ons-list-item style="height: 50px; color: black; font-family: futura;">
-				<ons-input ng-model="name" placeholder="Search for user/game"></ons-input>
-				<div class="right">
-					<ons-button ng-click="searchInfo(name)">Search</ons-button>
-				</div>
-			</ons-list-item>
-		</ons-list>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-				users
-			</ons-list-header>
-			<ons-list-item style="height: 50px; color: black; font-family: futura;">
-				<div class="center">
-					{{selUser.username}}
-				</div>
-			</ons-list-item>
-		</ons-list>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-				Games
-			</ons-list-header>
-			<ons-list-item style="height: 50px; color: black; font-family: futura;">
-				<div class="center">
-					{{selGame.name}}
-				</div>
-			</ons-list-item>
-		</ons-list>
 
 
+		<ons-list style="background-color: rgba(255, 255, 255, 0);">
+			<ons-list-item style="height: 50px; color: white; font-family: futura;">
+				<div style="width: 100%; text-align: center;">
+					<h4>Stories</h4>
+				</div>
+			</ons-list-item>
+		</ons-list>
+		
+		<ons-list style="background-color: rgba(255, 255, 255, 0);" ng-repeat="(key, val) in currentUser.stories">
+
+			<ons-list-header style="background-color: rgba(255, 255, 255); font-family: futura;">{{val.name}}</ons-list-header>
+			<ons-list-item style="color: white; font-family: futura;">
+				{{val.story}}
+			</ons-list-item>
+		</ons-list>
 		</br>
 		</br>
 		</br>

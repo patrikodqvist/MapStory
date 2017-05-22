@@ -1,19 +1,80 @@
-<ons-page>
-	{{createMap()}}
-	<ons-toolbar modifier="transparent">
-		<div class="left">
-			<ons-toolbar-button style="color: white;">
-				{{currentUser.username}}
-			</ons-toolbar-button>
-		</div>
-		<div class="center" ui-sref="home" style="color: white; font-family: futura;">Map Story</div>
-		<div class="right" style="color: white; font-family: futura;">
-			<a href="" id="icon" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span></a>
-		</div>
-	</ons-toolbar>
-	
-	<div class="list-item__center" id="map" style="height: 87%;"></div>
+<ons-splitter>
+	<ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+		<ons-page>
+			<ons-list>
+			<ons-list-header>
+			User
+			</ons-list-header>
+				<ons-list-item tappable>
+					<p style="color: black; font-family: futura;">{{currentUser.username}}</p>
+				</ons-list-item>
+			</ons-list>
+			<ons-list>
+				<ons-list-header>
+					Pages
+				</ons-list-header>
+				<ons-list-item ng-click="home()" tappable>
+					<p style="color: black; font-family: futura;">Home</p>
+				</ons-list-item>
+				<ons-list-item ng-click="yo()" tappable>
+					<p style="color: black; font-family: futura;">Profile</p>
+				</ons-list-item>
+				<ons-list-item ng-click="search()" tappable>
+					<p style="color: black; font-family: futura;">Search</p>
+				</ons-list-item>
+				<ons-list-item tappable>
+					<p style="color: black; font-family: futura;">Settings</p>
+				</ons-list-item>
+			</ons-list>
+			<ons-list>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</ons-list>
+		</ons-page>
+	</ons-splitter-side>
+	<ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+</ons-splitter>
 
-	</br>
-	<ons-button ng-click="setGame()" class="button--large--cta" style="width: 80%; margin: 0 auto;background-color: rgba(30,144,200, 0.7); font-family: futura;">Start your own game!</ons-button>
-</ons-page>
+
+<ons-template id="home.html">
+	<ons-page>
+		{{createMap()}}
+		<ons-toolbar modifier="transparent">
+			<div class="left">
+				<ons-toolbar-button ng-click="splitter()">
+					<ons-icon style="color:white;" icon="md-menu"></ons-icon>
+				</ons-toolbar-button>
+			</div>
+			<div class="center" ui-sref="home" style="color: white; font-family: futura;">Map Story</div>
+			<div class="right" style="color: white;">
+				<ons-toolbar-button>
+					<a href="" style="color:white; font-family: futura;" ng-click="logOut()">Log out</a>
+				</ons-toolbar-button>
+			</div>
+		</ons-toolbar>
+		
+		<div class="list-item__center" id="map" style="height: 87%;"></div>
+
+		</br>
+		<ons-button ng-click="setGame()" class="button--large--cta" style="width: 80%; margin: 0 auto;background-color: rgba(30,144,200, 0.7); font-family: futura;">Start your own game!</ons-button>
+	</ons-page>
+</ons-template>
