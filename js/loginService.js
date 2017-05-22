@@ -23,7 +23,17 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
 			user.password
 		).then(function(user){
 			console.log("login success");
-			$window.location.href="#!/home"
+			var agree = confirm('Accept sound');
+			if (agree) {
+				var audio = new Audio('images/fireMusic.mp3');
+				audio.play();
+				audio.pause();
+				$window.location.href="#!/home"
+			}
+			else {
+				$window.location.href="#!/home"
+			}
+			
 		}).catch(function(error) {
 			$rootScope.errorMessage = error.message;
 		});
@@ -78,34 +88,53 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
   					map: $rootScope.map
     			});
     			Marker.addListener('click', function() {
-    				var test = confirm("Accept to Join");
-    				if (test) {
-    					var result = gameModel.getDistance($rootScope.pos,value.location);
-    					$rootScope.game = value;
-    					if (result <= value.range) {	
-	    					$rootScope.inGame=true;
-	    					$rootScope.playSound = false;
-	    					Pubnub.setUUID($rootScope.currentUser.username);
-	    					Pubnub.hereNow({
-					    		channels: [$rootScope.game.channel],
-					    		includeUUIDs: true},
-					    		function(status, response) {
-					    			angular.forEach(response.channels, function(obj,nyckel){
-					    				$rootScope.onlineUsers = obj.occupants;
-					    				if (obj.occupants.length < value.numPlayers) {
-					    					$window.location.href = '#!/game/'+ value.id;
-					    				}
-					    				else {
-					    					$window.alert('Game is currently full')
-					    					$rootScope.inGame=false;
-					    				}
-					    			});
-					  			}
-					  		);
-		    			}
-		    			else {
-		    				$window.alert('You are too far away, You have to be in the story area!')
-		    			}
+    				var cancel = false;
+    				if (value.host == $rootScope.currentUser.username) {
+    					var login = prompt("Type in your Host password if you want to delete your game, Press Cancel to join", "Password");
+    					if (login == null) {
+    					}
+    					else if (login == value.gamePassword) {
+    						cancel=true;
+    						service.saveStory($rootScope.currentUser.id, value);
+    						gameRef.child(value.id).remove().then(
+    							service.removeHost($rootScope.currentUser.id, value)
+    							).then($window.location.reload());
+
+    					}
+    					else {
+    						$window.alert('Wrong Password');
+    					}
+    				}
+    				if (cancel == false) {
+	    				var test = confirm("Accept to Join");
+	    				if (test) {
+	    					var result = gameModel.getDistance($rootScope.pos,value.location);
+	    					$rootScope.game = value;
+	    					if (result <= value.range) {	
+		    					$rootScope.inGame=true;
+		    					$rootScope.playSound = false;
+		    					Pubnub.setUUID($rootScope.currentUser.username);
+		    					Pubnub.hereNow({
+						    		channels: [$rootScope.game.channel],
+						    		includeUUIDs: true},
+						    		function(status, response) {
+						    			angular.forEach(response.channels, function(obj,nyckel){
+						    				$rootScope.onlineUsers = obj.occupants;
+						    				if (obj.occupants.length < value.numPlayers) {
+						    					$window.location.href = '#!/game/'+ value.id;
+						    				}
+						    				else {
+						    					$window.alert('Game is currently full')
+						    					$rootScope.inGame=false;
+						    				}
+						    			});
+						  			}
+						  		);
+			    			}
+			    			else {
+			    				$window.alert('You are too far away, You have to be in the story area!')
+			    			}
+			    		}
 		    		}
         		});
     			var cityCircle = new google.maps.Circle({
@@ -127,10 +156,19 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
 		userStories.child(game.id).set({
 			name: game.name,
 			id: game.id,
-			story: game.story
+			story: game.story,
+			host: game.host,
+			players: game.players
 		}).then($window.location.href = '#!/home')
 			
-		},
+	},
+	//Removes The game from profile host list
+    removeHost: function(userId, game) {
+    	var userStories = ref.child(userId).child("host").child(game.id).remove(
+    		).then(
+    		$window.location.href = '#!/home')
+			
+	},
     //require Authentication
 	requireAuth: function() {
       return auth.$requireSignIn();

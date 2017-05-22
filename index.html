@@ -7,6 +7,7 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	    <link rel="stylesheet" href="index.css"/>
 	    <!--MobileTags-->
+	    <meta name="viewport" content="width=device-width, minimal-ui">
 		<meta name="viewport" content="width=device-width, user-scalable=no
 			initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 		<!--Title-->
@@ -53,6 +54,14 @@
 			messagingSenderId: "763382370568"
 			};
 			firebase.initializeApp(config);
+		</script>
+		<script>
+			window.addEventListener("load",function() {
+    			setTimeout(function(){
+        			// This hides the address bar:
+        			window.scrollTo(0, 1);
+    				}, 0);
+				});
 		</script>
 	</body>
 </html>

@@ -41,20 +41,33 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 	 // Initiates the player with firesound
 	$rootScope.player = $interval(function(){
 		if ($rootScope.Playing) {
-		}
-		else {
-		if ($rootScope.playSound) {
-			$rootScope.Playing=true;
-			$scope.audio = new Audio('images/fireMusic.mp3');
-			$scope.audio.play();
-			$scope.audio.addEventListener("ended", function(){
-     			$rootScope.Playing = false;
-			});
-		}
-		else {
-			if ($scope.audio) {
+			if ($rootScope.inGame) {
+				if ($scope.audio) {
+					$scope.audio.pause();
+				}
+				
+			}
+			else if ($rootScope.playSound==false) {
+				if ($scope.audio) {
+					$scope.audio.pause();
+				}
+				
 			}
 		}
+		else {
+			if ($rootScope.playSound) {
+				$rootScope.Playing=true;
+				$scope.audio = new Audio('images/fireMusic.mp3');
+				$scope.audio.play();
+				$scope.audio.addEventListener("ended", function(){
+	     			$rootScope.Playing = false;
+				});
+			}
+			else {
+				if ($scope.audio) {
+					$scope.audio.pause();
+				}
+			}
 	}
 	}, 1000);
 	// Tracks the user location
@@ -93,6 +106,7 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 	}, 10000);
     // Loggs out the User
     $scope.logOut = function() {
+    	$scope.audio.pause();
     	$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
     	loginService.logout()

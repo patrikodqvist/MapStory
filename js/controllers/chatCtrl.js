@@ -1,4 +1,5 @@
 mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, firebase, loginService, $window) {
+	$scope.fewWords = false;
 	// Join channel
 	Pubnub.subscribe({
     	channels: [$rootScope.game.channel],
@@ -9,14 +10,19 @@ mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, 
 		if ($rootScope.game) {
 			var res = $rootScope.game.numWords - $rootScope.game.round;
 			if (res == 10) {
-				$window.alert('Only ten words left');
+				if ($scope.fewWords == false) {
+					$window.alert('Only ten words left');
+					$scope.fewWords=true;
+				}
 			}
 			if ($rootScope.game.numWords == $rootScope.game.round) {
+				var game = $rootScope.game;
 				var test = confirm('The game is now over! The story will be saved to your profile');
 				loginService.saveStory($rootScope.currentUser.id, $rootScope.game);
 				if ($rootScope.game.host == $rootScope.currentUser.username) {
-					refStory.remove();
-					$window.location.href="#!/home";
+					refStory.remove(
+						).then(loginService.removeHost($rootScope.currentUser.id, game
+							)).then($window.location.href="#!/home")
 				}
 				else {
 					$window.location.href="#!/home";
