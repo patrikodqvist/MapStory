@@ -1,4 +1,12 @@
 mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, firebase, loginService, $window) {
+	if ($rootScope.currentUser) {
+
+	}
+	else {
+		$window.location.href = "#!/login"
+		$window.location.reload();
+	}
+	
 	$scope.fewWords = false;
 	// Join channel
 	Pubnub.subscribe({

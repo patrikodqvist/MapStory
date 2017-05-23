@@ -2,7 +2,7 @@ var mapStory = angular.module('mapStory',['onsen', 'ui.router', "pubnub.angular.
 mapStory.value('currentUser', Math.random().toString(36).substring(7));
 
 mapStory.run(function($rootScope, Pubnub, currentUser, $firebaseObject, $window) {
-	 //Initiates Pubnub
+   //Initiates Pubnub
    Pubnub.init({
      publish_key: 'pub-c-9ded1149-0d94-4941-af4b-1eac63c501b0',
      subscribe_key: 'sub-c-140f0530-3589-11e7-b860-02ee2ddab7fe',
@@ -31,7 +31,7 @@ mapStory.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'partials/createUser.html',
         controller: 'loginCtrl',
       }).
-    	state('home', {
+      state('home', {
         url: '/home',
         templateUrl: 'partials/home.html',
         controller: 'homeCtrl'
@@ -49,12 +49,12 @@ mapStory.config(function($stateProvider, $urlRouterProvider) {
       state('profile', {
         url: '/profile',
         templateUrl: 'partials/profilePage.html',
-        controller: 'profileCtrl'
+        controller: 'windowCtrl'
       }).
       state('search', {
         url: '/search',
         templateUrl: 'partials/search.html',
-        controller: 'searchCtrl'
+        controller: 'windowCtrl'
       })
       $urlRouterProvider.
       otherwise("/login", {

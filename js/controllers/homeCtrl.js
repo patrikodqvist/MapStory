@@ -4,14 +4,20 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 	$rootScope.Playing =false;
 
 	$scope.home = function() {
+		$interval.cancel($rootScope.trackUser);
+    	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/home";
 	}
 	$scope.yo = function() {
+		$interval.cancel($rootScope.trackUser);
+    	$interval.cancel($rootScope.player);
 		loginService.getUser($rootScope.currentUser.id)
 		$window.location.href = "#!/profile"
 		
 	}
 	$scope.search = function() {
+		$interval.cancel($rootScope.trackUser);
+    	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/search";
 	}
 
@@ -27,6 +33,7 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 	// Creates the map
 	$scope.createMap = function() {
 		if (gameModel.mapLoad==false) {
+			$scope.initMap();
 			gameModel.mapLoad=true;
 		}
 	}
@@ -55,7 +62,6 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
            
 	  	});
 	 }
-	 $scope.initMap();
 	 // Initiates the player with firesound
 	$rootScope.player = $interval(function(){
 		if ($rootScope.Playing) {
