@@ -171,17 +171,28 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
 			
 	},
 	// User search
-	userSearch: function(name) {
-      var users = $firebaseArray(ref);
-      users.$loaded().then(function(ref){
-        	for (var profile in ref) {
-        		if (ref[profile].username == name) {
-        			$rootScope.selUser = ref[profile];
-        		}
-        	}
-          })
+	userSearch: function(substring){
+      var list = [];
+      var reference = $firebaseArray(ref);
+      reference.$loaded()
+      .then(function(reference) {
+        for (i in reference) {
+          var string = reference[i].username;
+          var res = string.toLowerCase();
+          console.log(string);
+          if (res.indexOf(substring) !== -1) {
+             list.push(reference[i]);
+             $rootScope.searchedUser = list;
+          }
+        }
+      })
+      .catch(function(error) {
+        $rootScope.error = error;
+        $rootScope.errorMessage = "User not found!";
+      })
     },
-    // User search
+
+    //User search
 	getUser: function(id) {
       var users = $firebaseArray(ref);
       users.$loaded().then(function(ref){
@@ -192,17 +203,37 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
         	}
           });
     },
-    // Game search
-    gameSearch: function(gameName) {
-      var searchGames = $firebaseArray(gameRef);
-      searchGames.$loaded().then(function(ref){
-        	for (var game in ref) {
-        		if (ref[game].name == gameName) {
-        			console.log(ref[game]);
-        			$rootScope.selGame = ref[game];
+
+    gameSearch: function(substring){
+      var list = [];
+      var reference = $firebaseArray(gameRef);
+      reference.$loaded()
+      .then(function(reference) {
+        for (i in reference) {
+          var string = reference[i].name;
+          var res = string.toLowerCase();
+          console.log(string);
+          if (res.indexOf(substring) !== -1) {
+             list.push(reference[i]);
+             $rootScope.searchedGame = list;
+          }
+        }
+      })
+      .catch(function(error) {
+        $rootScope.error = error;
+        $rootScope.errorMessage = "Game not found!";
+      })
+    },
+
+    getGame: function(id) {
+      var games = $firebaseArray(gameRef);
+      games.$loaded().then(function(gameRef){
+        	for (var game in gameRef) {
+        		if (gameRef[game].id == id) {
+        			$rootScope.selGame = gameRef[game];
         		}
         	}
-          })
+          });
     },
     // Saves the story to the feed
     saveStoryToFeed: function(game) {

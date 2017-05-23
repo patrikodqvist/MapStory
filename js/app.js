@@ -55,6 +55,31 @@ mapStory.config(function($stateProvider, $urlRouterProvider) {
         url: '/search',
         templateUrl: 'partials/search.html',
         controller: 'windowCtrl'
+      }).
+      state('userSettings', {
+        url: '/userSettings',
+        templateUrl: 'partials/userSettings.html',
+        controller: 'windowCtrl'
+      }).
+      state('searchedGame', {
+        url: '/searchedGame',
+        templateUrl: 'partials/searchedGame.html',
+        controller: 'windowCtrl'
+      }).
+      state('aboutUs', {
+        url: '/aboutUs',
+        templateUrl: 'partials/aboutUs.html',
+        controller: 'windowCtrl'
+      }).
+      state('storyFeed', {
+        url: '/storyFeed',
+        templateUrl: 'partials/storyFeed.html',
+        controller: 'windowCtrl'
+      }).
+      state('friendsList', {
+        url: '/friendsList',
+        templateUrl: 'partials/friendsList.html',
+        controller: 'windowCtrl'
       })
       $urlRouterProvider.
       otherwise("/login", {
