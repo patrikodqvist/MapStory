@@ -20,7 +20,7 @@ mapStory.controller('windowCtrl', function($window,$rootScope,$scope, Pubnub, cu
 
 	$scope.home = function() {
 		$window.location.href = "#!/home";
-		$window.location.reload()
+		//$window.location.reload()
 	}
 	$scope.profile = function() {
 		loginService.getUser($rootScope.currentUser.id);

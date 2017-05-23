@@ -1,6 +1,5 @@
 mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, firebase, loginService, $window) {
 	if ($rootScope.currentUser) {
-
 	}
 	else {
 		$window.location.href = "#!/home"
@@ -30,7 +29,7 @@ mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, 
 				if ($rootScope.game.host == $rootScope.currentUser.username) {
 					refStory.remove(
 						).then(loginService.removeHost($rootScope.currentUser.id, game
-							)).then($window.location.href="#!/home")
+							)).then(loginService.saveStoryToFeed(game)).then($window.location.href="#!/home")
 				}
 				else {
 					$window.location.href="#!/home";
@@ -69,7 +68,12 @@ mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, 
 					round +=1
 					refStory.child("lastUser").set($rootScope.currentUser.username);
 		    		refStory.child("round").set(round);
-		    		$scope.written = true;
+		    		if ($scope.written == false) {
+		    			refStory.child("players").child($rootScope.currentUser.id).set($rootScope.currentUser.username);
+		    			$scope.written = true;
+
+		    		}
+		    		
 				}
 				else {
 					$window.alert("only one word each")
@@ -101,11 +105,11 @@ mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, 
 			refStory.child("players").child($rootScope.currentUser.id).set($rootScope.currentUser.username)
 			loginService.saveStory($rootScope.currentUser.id, $rootScope.game);
 			$window.location.href="#!/home"
-			$window.location.reload();
+			//$window.location.reload();
 		}
 		else {
 			$window.location.href="#!/home"
-			$window.location.reload();
+			//$window.location.reload();
 		}
 	}
 });

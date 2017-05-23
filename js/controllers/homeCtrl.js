@@ -33,7 +33,6 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 	// Creates the map
 	$scope.createMap = function() {
 		if (gameModel.mapLoad==false) {
-			$scope.initMap();
 			gameModel.mapLoad=true;
 		}
 	}
@@ -138,5 +137,6 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
     	loginService.logout();
     	
     }
-    
+    $scope.initMap();
+
 });

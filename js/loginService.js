@@ -1,6 +1,7 @@
 mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$firebaseAuth', '$firebaseArray','Pubnub','gameModel', function($rootScope,$window,$firebaseObject, $firebaseAuth,$firebaseArray , Pubnub,gameModel) {
 	var ref = firebase.database().ref("users");
 	var gameRef = firebase.database().ref("games");
+	var feed = firebase.database().ref("feed");
 	var object = $firebaseObject(ref);
 	var auth = $firebaseAuth();
 
@@ -50,6 +51,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
 				$rootScope.errorMessage= error.message;
 			});
 	},
+	//creates the game
 	createGame: function(gameName, game) {
 		gameRef.child(gameName).set(game
 		).then(function(ref) {
@@ -57,6 +59,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
 			service.addHostToProfile(game);
       });
     },
+    //adds host to profile
     addHostToProfile: function(game) {
       ref.child($rootScope.currentUser.id).child("host").child(game.id).set({
       	gameName: game.name,
@@ -66,7 +69,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
       	$window.location.href = '#!/game/'+game.id;
       });
     },
-    //prints out all games
+    // Prints out all games
     printGames: function() {
     	var games = $firebaseArray(gameRef);
     	games.$loaded().then(function(reference) {
@@ -140,7 +143,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
     		});
     	});
     },
-    //Saves the stories to the user
+    // Saves the stories to the user
     saveStory: function(userId, game) {
     	var userStories = ref.child(userId).child("stories");
 		userStories.child(game.id).set({
@@ -152,14 +155,14 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
 		}).then($window.location.href = '#!/home')
 			
 	},
-	//Removes The game from profile host list
+	// Removes The game from profile host list
     removeHost: function(userId, game) {
     	var userStories = ref.child(userId).child("host").child(game.id).remove(
     		).then(
     		$window.location.href = '#!/home')
 			
 	},
-	//Removes The game from profile host list
+	// Removes The game from profile host list
     removeStory: function(userID,id) {
     	console.log(userID, id)
     	var userStories = ref.child(userID).child("stories").child(id);
@@ -167,7 +170,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
     	//.child(id).remove().then(console.log("succes"))
 			
 	},
-	//User search
+	// User search
 	userSearch: function(name) {
       var users = $firebaseArray(ref);
       users.$loaded().then(function(ref){
@@ -178,7 +181,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
         	}
           })
     },
-    //User search
+    // User search
 	getUser: function(id) {
       var users = $firebaseArray(ref);
       users.$loaded().then(function(ref){
@@ -189,7 +192,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
         	}
           });
     },
-    //Game search
+    // Game search
     gameSearch: function(gameName) {
       var searchGames = $firebaseArray(gameRef);
       searchGames.$loaded().then(function(ref){
@@ -201,11 +204,20 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
         	}
           })
     },
-    //require Authentication
+    // Saves the story to the feed
+    saveStoryToFeed: function(game) {
+    	feed.child(game.id).set({
+    		story: game.story,
+    		host: game.host,
+    		players: game.players,
+    		date: new Date().toISOString().slice(0,10)
+    	});
+    },
+    // Require Authentication
 	requireAuth: function() {
       return auth.$requireSignIn();
     }, 
-    //logout
+    // Logout
     logout: function() {
       auth.$signOut();
       $window.location.href= '#!/login';
