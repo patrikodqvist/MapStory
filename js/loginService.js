@@ -235,6 +235,51 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
         	}
           });
     },
+
+    changeEmail: function(email) {
+      var reference = $firebaseObject(ref.child($rootScope.currentUser.id));
+      reference.$loaded().then(function(reference){
+        reference.email = email;
+        reference.$save().then(function() {
+          console.log("success"); // true
+          auth.$updateEmail(email).then(function() {
+            console.log("Email changed in authentication-module!");
+          }).catch(function(error) {
+            console.log(error);
+            $rootScope.error = error;
+            $rootScope.errorMessage = error.message;
+          });
+        });
+      })
+    },
+
+    changePassword: function(password) {
+      var reference = $firebaseObject(ref.child($rootScope.currentUser.id));
+      reference.$loaded().then(function(reference){
+        reference.password = password;
+        reference.$save().then(function() {
+          console.log("success"); // true
+          auth.$updatePassword(password).then(function() {
+            console.log("Email changed in authentication-module!");
+          }).catch(function(error) {
+            console.log(error);
+            $rootScope.error = error;
+            $rootScope.errorMessage = error.message;
+          });
+        });
+      })
+    },
+
+    changeUsername: function(username) {
+      var reference = $firebaseObject(ref.child($rootScope.currentUser.id));
+      reference.$loaded().then(function(reference){
+        reference.username = username;
+        reference.$save().then(function() {
+          console.log("success"); // true
+        });
+      })
+    },
+    
     // Saves the story to the feed
     saveStoryToFeed: function(game) {
     	feed.child(game.id).set({

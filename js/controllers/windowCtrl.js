@@ -34,6 +34,7 @@ mapStory.controller('windowCtrl', function($window,$rootScope,$scope, Pubnub, cu
 
 
 	$scope.home = function() {
+		gameModel.mapLoad=false
 		$window.location.href = "#!/home";
 	}
 	$scope.profile = function() {

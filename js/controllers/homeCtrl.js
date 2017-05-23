@@ -1,9 +1,36 @@
 mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, currentUser, loginService, gameModel, firebase, $interval) {	
+	// Initiates the map
+	$scope.initMap = function() {
+		 navigator.geolocation.getCurrentPosition(function(position) {
+	        $rootScope.pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+	        
+	        var mapProp= {
+    			center:$scope.pos,
+    			zoom:16,
+			};
+			$rootScope.map = new google.maps.Map(document.getElementById("map"),mapProp);
+			var lineSymbol = {
+  				path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+			};
+			$scope.marker = new google.maps.Marker({
+				icon: {
+      				path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+      				scale: 5,
+      				offset: '100%'
+    			},
+  				position:$scope.pos,
+  				map: $rootScope.map});
+            loginService.printGames();
+           
+	  	});
+	 }
+
 	$rootScope.playSound = false;
 	$rootScope.inGame = false;
 	$rootScope.Playing =false;
 
 	$scope.home = function() {
+		
 		$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/home";
@@ -57,34 +84,12 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 	// Creates the map
 	$scope.createMap = function() {
 		if (gameModel.mapLoad==false) {
+			$scope.initMap();
 			gameModel.mapLoad=true;
 		}
 	}
-	// Initiates the map
-	$scope.initMap = function() {
-		 navigator.geolocation.getCurrentPosition(function(position) {
-	        $rootScope.pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-	        
-	        var mapProp= {
-    			center:$scope.pos,
-    			zoom:16,
-			};
-			$rootScope.map = new google.maps.Map(document.getElementById("map"),mapProp);
-			var lineSymbol = {
-  				path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
-			};
-			$scope.marker = new google.maps.Marker({
-				icon: {
-      				path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-      				scale: 5,
-      				offset: '100%'
-    			},
-  				position:$scope.pos,
-  				map: $rootScope.map});
-            loginService.printGames();
-           
-	  	});
-	 }
+	
+	
 	 // Initiates the player with firesound
 	$rootScope.player = $interval(function(){
 		if ($rootScope.Playing) {
@@ -161,6 +166,6 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
     	loginService.logout();
     	
     }
-    $scope.initMap();
+   
 
 });
