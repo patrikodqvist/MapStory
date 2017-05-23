@@ -76,7 +76,7 @@
 				</div>
 			</ons-list-item>
 		</ons-list>
-		
+		{{displayGame()}}
 		<ons-list style="background-color: rgba(255, 255, 255, 0);" >
 			<ons-list-header style="background-color: rgba(255, 255, 255); font-family: futura;">Name</ons-list-header>
 			<ons-list-item style="color: white; font-family: futura;">
@@ -119,6 +119,11 @@
 				{{selGame.round}}
 			</ons-list-item>
 		</ons-list>
+		<ons-list style="background-color: rgba(255, 255, 255, 0);" >
+			<ons-list-header style="background-color: rgba(255, 255, 255); font-family: futura;">Game location
+			</ons-list-header>
+		</ons-list>
+		<div id="mapTwo" style="height: 50%;"></div>
 			
 		</ons-list>
 		</br>

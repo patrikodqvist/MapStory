@@ -6,6 +6,7 @@ mapStory.controller('windowCtrl', function($window,$rootScope,$scope, Pubnub, cu
 		$window.location.href = "#!/home"
 		$window.location.reload();
 	}
+    $scope.mapCreated = false;
 	$rootScope.playSound = false;
 	$rootScope.inGame = false;
 	$rootScope.Playing =false;
@@ -137,4 +138,34 @@ mapStory.controller('windowCtrl', function($window,$rootScope,$scope, Pubnub, cu
     $scope.deleteFriend = function() {
     	ref.child($rootScope.selUser.id).remove();
     }
+    $scope.displayGame = function() {
+        console.log("hej");
+        if ($scope.mapCreated == false) {
+            console.log("hej");
+            var mapSettings= {
+                center:$rootScope.selGame.location,
+                zoom:16,
+            };
+            console.log(document.getElementById("mapTwo"));
+            var map = new google.maps.Map(document.getElementById("mapTwo"),mapSettings);
+            
+            var marker = new google.maps.Marker({
+                
+                position:$rootScope.selGame.location,
+                map: map});
+            var cityCircle = new google.maps.Circle({
+                    strokeColor: '#0000ff',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#0000ff',
+                    fillOpacity: 0.35,
+                    map: map,
+                    center: $rootScope.selGame.location,
+                    radius: $rootScope.selGame.range
+                });
+            $scope.mapCreated = true;
+        }
+    }
+           
+        
 });
