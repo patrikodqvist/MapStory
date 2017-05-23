@@ -3,7 +3,6 @@ mapStory.controller('setGameCtrl', function($window,$rootScope,$scope, Pubnub, c
 	
 	//Creates Game
 	$scope.createGame = function(gameName,numPlayers,numWords,range,gamePassword) {
-		console.log($rootScope.currentUser.password);
 		Pubnub.setUUID($rootScope.currentUser.username);
 		var gameId = Math.random().toString(36).substring(7)
 		newGame = {
@@ -20,7 +19,6 @@ mapStory.controller('setGameCtrl', function($window,$rootScope,$scope, Pubnub, c
 			story: "",
 			round: 0
 		};
-		console.log(newGame);
 		navigator.geolocation.getCurrentPosition(function(position) {
 	        var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
 	        newGame.location.lat = pos.lat;

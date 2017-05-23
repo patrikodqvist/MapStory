@@ -51,7 +51,6 @@
 	</ons-splitter-side>
 	<ons-splitter-content id="content" page="profile.html"></ons-splitter-content>
 </ons-splitter>
-
 <ons-template id="profile.html">
 	<ons-page>
 		<ons-toolbar modifier="transparent">
@@ -67,10 +66,7 @@
 				</ons-toolbar-button>
 			</div>
 		</ons-toolbar>
-
-
 		{{checkFriend()}}
-
 		<ons-list style="background-color: rgba(255, 255, 255, 0);">
 			<ons-list-item style="height: 50px; color: white; font-family: futura;">
 				<h4>{{selUser.username}}</h4>
@@ -85,9 +81,7 @@
 				</div>
 			</ons-list-item>
 		</ons-list>
-		
 		<ons-list style="background-color: rgba(255, 255, 255, 0);" ng-repeat="(key, val) in selUser.stories">
-
 			<ons-list-header style="background-color: rgba(255, 255, 255); font-family: futura;">{{val.name}}</ons-list-header>
 			<ons-list-item style="color: white; font-family: futura;">
 				{{val.story}}

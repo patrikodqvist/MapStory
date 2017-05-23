@@ -5,7 +5,6 @@ mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, 
 		$window.location.href = "#!/home"
 		$window.location.reload();
 	}
-	
 	$scope.fewWords = false;
 	// Join channel
 	Pubnub.subscribe({

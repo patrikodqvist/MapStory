@@ -24,17 +24,14 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
            
 	  	});
 	 }
-
 	$rootScope.playSound = false;
 	$rootScope.inGame = false;
 	$rootScope.Playing =false;
-
+	// redirects home
 	$scope.home = function() {
-		
-		$interval.cancel($rootScope.trackUser);
-    	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/home";
 	}
+	// profile
 	$scope.profile = function() {
 		$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
@@ -42,36 +39,37 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 		$window.location.href = "#!/profile"
 		
 	}
+	// search
 	$scope.search = function() {
 		$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/search";
 	}
-
+	// user settings
 	$scope.userSettings = function() {
 		$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/userSettings";
 	}
-
+	// about us
 	$scope.aboutUs = function() {
 		$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/aboutUs";
 	}
-
+	// story feed
 	$scope.storyFeed = function() {
 		$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/storyFeed";
 	}
-
+	// friendslist
 	$scope.friendsList = function() {
 		$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
 		$window.location.href = "#!/friendsList";
 	}
-
+	//menu
 	$scope.splitter = function() {
 		  var menu = document.getElementById('menu');
 		  menu.open();
@@ -88,8 +86,6 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 			gameModel.mapLoad=true;
 		}
 	}
-	
-	
 	 // Initiates the player with firesound
 	$rootScope.player = $interval(function(){
 		if ($rootScope.Playing) {
@@ -165,6 +161,10 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
     	$interval.cancel($rootScope.player);
     	loginService.logout();
     	
+    }
+    // refresh function
+    $scope.refreshMap = function() {
+    	$scope.initMap()
     }
    
 
