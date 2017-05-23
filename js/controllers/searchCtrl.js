@@ -1,6 +1,5 @@
 mapStory.controller('searchCtrl', function($window,$rootScope,$scope, Pubnub, currentUser, loginService, gameModel, firebase, $interval) {
 	$scope.searchInfo = function(name) {
-		
 		loginService.userSearch(name);
 		loginService.gameSearch(name);
 	}
@@ -10,7 +9,9 @@ mapStory.controller('searchCtrl', function($window,$rootScope,$scope, Pubnub, cu
 	}
 
 	$scope.profile = function() {
-		$window.location.href = "#!/profile";
+		loginService.getUser($rootScope.currentUser.id).then(function(ref){
+			$window.location.href = "#!/profile"
+		})
 	}
 
 	$scope.search = function() {

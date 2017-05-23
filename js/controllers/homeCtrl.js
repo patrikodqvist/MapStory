@@ -7,7 +7,9 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 		$window.location.href = "#!/home";
 	}
 	$scope.yo = function() {
-		$window.location.href = "#!/profile";
+		loginService.getUser($rootScope.currentUser.id)
+		$window.location.href = "#!/profile"
+		
 	}
 	$scope.search = function() {
 		$window.location.href = "#!/search";
@@ -53,6 +55,7 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
            
 	  	});
 	 }
+	 $scope.initMap();
 	 // Initiates the player with firesound
 	$rootScope.player = $interval(function(){
 		if ($rootScope.Playing) {
@@ -121,10 +124,13 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 	}, 10000);
     // Loggs out the User
     $scope.logOut = function() {
-    	$scope.audio.pause();
+    	if ($scope.audio) {
+    		$scope.audio.pause();
+    	} 
     	$interval.cancel($rootScope.trackUser);
     	$interval.cancel($rootScope.player);
-    	loginService.logout()
+    	loginService.logout();
+    	
     }
-    $scope.initMap();
+    
 });

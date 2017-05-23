@@ -23,17 +23,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
 			user.password
 		).then(function(user){
 			console.log("login success");
-			var agree = confirm('Accept sound');
-			if (agree) {
-				var audio = new Audio('images/fireMusic.mp3');
-				audio.play();
-				audio.pause();
-				$window.location.href="#!/home"
-			}
-			else {
-				$window.location.href="#!/home"
-			}
-			
+			$window.location.href="#!/home"
 		}).catch(function(error) {
 			$rootScope.errorMessage = error.message;
 		});
@@ -180,6 +170,17 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
         	}
           })
     },
+    //User search
+	getUser: function(id) {
+      var users = $firebaseArray(ref);
+      users.$loaded().then(function(ref){
+        	for (var profile in ref) {
+        		if (ref[profile].id == id) {
+        			$rootScope.selUser = ref[profile];
+        		}
+        	}
+          });
+    },
     //Game search
     gameSearch: function(gameName) {
       var searchGames = $firebaseArray(gameRef);
@@ -200,6 +201,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
     logout: function() {
       auth.$signOut();
       $window.location.href= '#!/login';
+      $window.location.reload();
     }, 
 }
 	return service;

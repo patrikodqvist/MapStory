@@ -6,7 +6,7 @@
 			User
 			</ons-list-header>
 				<ons-list-item ng-click="profile()" tappable>
-					<p style="color: black; font-family: futura;">{{currentUser.username}}</p>
+					<p style="color: black; font-family: futura;">{{selUser.username}}</p>
 				</ons-list-item>
 			</ons-list>
 			<ons-list>
@@ -79,7 +79,7 @@
 			</ons-list-item>
 		</ons-list>
 		
-		<ons-list style="background-color: rgba(255, 255, 255, 0);" ng-repeat="(key, val) in currentUser.stories">
+		<ons-list style="background-color: rgba(255, 255, 255, 0);" ng-repeat="(key, val) in selUser.stories">
 
 			<ons-list-header style="background-color: rgba(255, 255, 255); font-family: futura;">{{val.name}}</ons-list-header>
 			<ons-list-item style="color: white; font-family: futura;">
