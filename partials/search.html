@@ -17,19 +17,13 @@
 					<p style="color: black; font-family: futura;">Home</p>
 				</ons-list-item>
 				<ons-list-item ng-click="profile()" tappable>
-					<p style="color: black; font-family: futura;">Your stories</p>
+					<p style="color: black; font-family: futura;">Profile</p>
 				</ons-list-item>
 				<ons-list-item ng-click="search()" tappable>
 					<p style="color: black; font-family: futura;">Search</p>
 				</ons-list-item>
 				<ons-list-item tappable>
 					<p style="color: black; font-family: futura;">Settings</p>
-				</ons-list-item>
-				<ons-list-item ng-click="aboutUs()" tappable>
-					<p style="color: black; font-family: futura;">About us</p>
-				</ons-list-item>
-				<ons-list-item ng-click="storyFeed()" tappable>
-					<p style="color: black; font-family: futura;">Recent stories</p>
 				</ons-list-item>
 			</ons-list>
 			<ons-list>
@@ -68,7 +62,7 @@
 					<ons-icon style="color:white;" icon="md-menu"></ons-icon>
 				</ons-toolbar-button>
 			</div>
-			<div class="center" ui-sref="home" style="color: white; font-family: futura;">Map Story</div>
+			<div class="center" ng-click="home()" style="color: white; font-family: futura;">Map Story</div>
 			<div class="right" style="color: white;">
 				<ons-toolbar-button>
 					<a href="" style="color:white; font-family: futura;" ng-click="logOut()">Log out</a>
@@ -90,22 +84,22 @@
 		</ons-list>
 		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
 			<ons-list-header>
-				Users
+				users
 			</ons-list-header>
-			<ons-list-item style="height: 50px;" ng-repeat="user in searchedUser" tappable>
-				<div class="center" style="color: black; font-family: futura;" ng-click="getUser(user.id)">
-					{{user.username}}
-				</div>
+			<ons-list-item style="height: 50px;">
+				<a href="#!/profile" ><div class="center" style="color: black; font-family: futura;">
+					{{selUser.username}}
+				</div></a>
 			</ons-list-item>
 		</ons-list>
 		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
 			<ons-list-header>
 				Games
 			</ons-list-header>
-			<ons-list-item style="height: 50px;" ng-repeat="game in searchedGame" tappable>
-				<div class="center" style="color: black; font-family: futura;" ng-click="getGame(game.id)">
-					{{game.name}}
-				</div>
+			<ons-list-item style="height: 50px;">
+				<a href=""><div class="center" style="color: black; font-family: futura;">
+					{{selGame.name}}
+				</div></a>
 			</ons-list-item>
 		</ons-list>
 

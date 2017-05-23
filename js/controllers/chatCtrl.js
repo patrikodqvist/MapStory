@@ -3,7 +3,7 @@ mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, 
 
 	}
 	else {
-		$window.location.href = "#!/login"
+		$window.location.href = "#!/home"
 		$window.location.reload();
 	}
 	
@@ -100,10 +100,12 @@ mapStory.controller('chatCtrl', function($rootScope, $scope, Pubnub, gameModel, 
 		if ($scope.written) {
 			refStory.child("players").child($rootScope.currentUser.id).set($rootScope.currentUser.username)
 			loginService.saveStory($rootScope.currentUser.id, $rootScope.game);
+			$window.location.href="#!/home"
+			$window.location.reload();
 		}
 		else {
 			$window.location.href="#!/home"
+			$window.location.reload();
 		}
 	}
-	$scope.getUsers()
 });

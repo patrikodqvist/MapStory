@@ -3,6 +3,7 @@ mapStory.controller('setGameCtrl', function($window,$rootScope,$scope, Pubnub, c
 	
 	//Creates Game
 	$scope.createGame = function(gameName,numPlayers,numWords,range,gamePassword) {
+		console.log($rootScope.currentUser.password);
 		Pubnub.setUUID($rootScope.currentUser.username);
 		var gameId = Math.random().toString(36).substring(7)
 		newGame = {
@@ -11,7 +12,7 @@ mapStory.controller('setGameCtrl', function($window,$rootScope,$scope, Pubnub, c
 			numPlayers:parseInt(numPlayers),
 			numWords:parseInt(numWords),
 			range:parseInt(range),
-			gamePassword:gamePassword,
+			gamePassword:$rootScope.currentUser.password,
 			host: $rootScope.currentUser.username,
 			channel: gameId,
 			players: "",

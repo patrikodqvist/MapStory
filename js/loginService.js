@@ -80,7 +80,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
     			Marker.addListener('click', function() {
     				var cancel = false;
     				if (value.host == $rootScope.currentUser.username) {
-    					var login = prompt("Type in your Host password if you want to delete your game, Press Cancel to join", "Password");
+    					var login = prompt("Type in your login password if you want to delete your game, Press Cancel to join", "Password");
     					if (login == null) {
     					}
     					else if (login == value.gamePassword) {
@@ -159,53 +159,16 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
     		$window.location.href = '#!/home')
 			
 	},
-
-	changeEmail: function(email) {
-      var reference = $firebaseObject(ref.child($rootScope.currentUser.id));
-      reference.$loaded().then(function(reference){
-        reference.email = email;
-        reference.$save().then(function() {
-          console.log("success"); // true
-          auth.$updateEmail(email).then(function() {
-            console.log("Email changed in authentication-module!");
-          }).catch(function(error) {
-            console.log(error);
-            $rootScope.error = error;
-            $rootScope.errorMessage = error.message;
-          });
-        });
-      })
-    },
-
-    changePassword: function(password) {
-      var reference = $firebaseObject(ref.child($rootScope.currentUser.id));
-      reference.$loaded().then(function(reference){
-        reference.password = password;
-        reference.$save().then(function() {
-          console.log("success"); // true
-          auth.$updatePassword(password).then(function() {
-            console.log("Email changed in authentication-module!");
-          }).catch(function(error) {
-            console.log(error);
-            $rootScope.error = error;
-            $rootScope.errorMessage = error.message;
-          });
-        });
-      })
-    },
-
-    changeUsername: function(username) {
-      var reference = $firebaseObject(ref.child($rootScope.currentUser.id));
-      reference.$loaded().then(function(reference){
-        reference.username = username;
-        reference.$save().then(function() {
-          console.log("success"); // true
-        });
-      })
-    },
-
+	//Removes The game from profile host list
+    removeStory: function(userID,id) {
+    	console.log(userID, id)
+    	var userStories = ref.child(userID).child("stories").child(id);
+    	userStories.remove()
+    	//.child(id).remove().then(console.log("succes"))
+			
+	},
 	//User search
-	/*userSearch: function(name) {
+	userSearch: function(name) {
       var users = $firebaseArray(ref);
       users.$loaded().then(function(ref){
         	for (var profile in ref) {
@@ -214,29 +177,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
         		}
         	}
           })
-    },*/
-
-    userSearch: function(substring){
-      var list = [];
-      var reference = $firebaseArray(ref);
-      reference.$loaded()
-      .then(function(reference) {
-        for (i in reference) {
-          var string = reference[i].username;
-          var res = string.toLowerCase();
-          console.log(string);
-          if (res.indexOf(substring) !== -1) {
-             list.push(reference[i]);
-             $rootScope.searchedUser = list;
-          }
-        }
-      })
-      .catch(function(error) {
-        $rootScope.error = error;
-        $rootScope.errorMessage = "User not found!";
-      })
     },
-
     //User search
 	getUser: function(id) {
       var users = $firebaseArray(ref);
@@ -249,7 +190,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
           });
     },
     //Game search
-   /* gameSearch: function(gameName) {
+    gameSearch: function(gameName) {
       var searchGames = $firebaseArray(gameRef);
       searchGames.$loaded().then(function(ref){
         	for (var game in ref) {
@@ -259,40 +200,7 @@ mapStory.factory('loginService', ['$rootScope', '$window', '$firebaseObject', '$
         		}
         	}
           })
-    },*/
-
-    gameSearch: function(substring){
-      var list = [];
-      var reference = $firebaseArray(gameRef);
-      reference.$loaded()
-      .then(function(reference) {
-        for (i in reference) {
-          var string = reference[i].name;
-          var res = string.toLowerCase();
-          console.log(string);
-          if (res.indexOf(substring) !== -1) {
-             list.push(reference[i]);
-             $rootScope.searchedGame = list;
-          }
-        }
-      })
-      .catch(function(error) {
-        $rootScope.error = error;
-        $rootScope.errorMessage = "Game not found!";
-      })
     },
-
-    getGame: function(id) {
-      var games = $firebaseArray(gameRef);
-      games.$loaded().then(function(gameRef){
-        	for (var game in gameRef) {
-        		if (gameRef[game].id == id) {
-        			$rootScope.selGame = gameRef[game];
-        		}
-        	}
-          });
-    },
-
     //require Authentication
 	requireAuth: function() {
       return auth.$requireSignIn();

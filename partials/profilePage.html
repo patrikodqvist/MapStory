@@ -6,7 +6,7 @@
 			User
 			</ons-list-header>
 				<ons-list-item ng-click="profile()" tappable>
-					<p style="color: black; font-family: futura;">{{currentUser.username}}</p>
+					<p style="color: black; font-family: futura;">{{selUser.username}}</p>
 				</ons-list-item>
 			</ons-list>
 			<ons-list>
@@ -17,19 +17,13 @@
 					<p style="color: black; font-family: futura;">Home</p>
 				</ons-list-item>
 				<ons-list-item ng-click="profile()" tappable>
-					<p style="color: black; font-family: futura;">Your stories</p>
+					<p style="color: black; font-family: futura;">Profile</p>
 				</ons-list-item>
 				<ons-list-item ng-click="search()" tappable>
 					<p style="color: black; font-family: futura;">Search</p>
 				</ons-list-item>
-				<ons-list-item ng-click="userSettings()" tappable>
+				<ons-list-item tappable>
 					<p style="color: black; font-family: futura;">Settings</p>
-				</ons-list-item>
-				<ons-list-item ng-click="aboutUs()" tappable>
-					<p style="color: black; font-family: futura;">About us</p>
-				</ons-list-item>
-				<ons-list-item ng-click="storyFeed()" tappable>
-					<p style="color: black; font-family: futura;">Recent stories</p>
 				</ons-list-item>
 			</ons-list>
 			<ons-list>
@@ -68,16 +62,27 @@
 					<ons-icon style="color:white;" icon="md-menu"></ons-icon>
 				</ons-toolbar-button>
 			</div>
-			<div class="center" ui-sref="home" style="color: white; font-family: futura;">Map Story</div>
+			<div class="center" ng-click="home()" style="color: white; font-family: futura;">Map Story</div>
 			<div class="right" style="color: white;">
 				<ons-toolbar-button>
 					<a href="" style="color:white; font-family: futura;" ng-click="logOut()">Log out</a>
 				</ons-toolbar-button>
 			</div>
 		</ons-toolbar>
-
+		{{checkFriend()}}
 
 		<ons-list style="background-color: rgba(255, 255, 255, 0);">
+			<ons-list-item style="height: 50px; color: white; font-family: futura;">
+				<div class="row">
+					<div class="col-xs-4">
+						<h4>{{selUser.username}}</h4>
+					</div>
+					<div class="col-xs-4" ng-if="notUser()">
+						<a style="color:white" ng-if="UserCheck" href="" ng-click="addFriend()">addFriend</a>
+						<a style="color:white" ng-if="UserCheck==false" href="" ng-click="deleteFriend()">removeFriend</a>
+					</div>
+				</div>
+			</ons-list-item>
 			<ons-list-item style="height: 50px; color: white; font-family: futura;">
 				<div style="width: 100%; text-align: center;">
 					<h4>Stories</h4>
@@ -87,9 +92,15 @@
 		
 		<ons-list style="background-color: rgba(255, 255, 255, 0);" ng-repeat="(key, val) in selUser.stories">
 
-			<ons-list-header style="background-color: rgba(255, 255, 255); font-family: futura;">{{val.name}}</ons-list-header>
+			<ons-list-header style="background-color: rgba(255, 255, 255); font-family: futura;">
+				{{val.name}}
+				
+			</ons-list-header>
 			<ons-list-item style="color: white; font-family: futura;">
 				{{val.story}}
+			</ons-list-item>
+			<ons-list-item style="color: white; font-family: futura;" ng-if="checkUser()">
+				<ons-button class="button--large--cta" ng-click="deleteStory(selUser.id, val.id)" style="width: 50%; height: 5%; margin: 0; padding: 0; background-color: rgba(242,17,17, 0.7); font-family: futura;">Delete</ons-button>
 			</ons-list-item>
 		</ons-list>
 		</br>

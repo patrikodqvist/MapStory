@@ -21,24 +21,6 @@ mapStory.controller('homeCtrl', function($window,$rootScope,$scope, Pubnub, curr
 		$window.location.href = "#!/search";
 	}
 
-	$scope.userSettings = function() {
-		$interval.cancel($rootScope.trackUser);
-    	$interval.cancel($rootScope.player);
-		$window.location.href = "#!/userSettings";
-	}
-
-	$scope.aboutUs = function() {
-		$interval.cancel($rootScope.trackUser);
-    	$interval.cancel($rootScope.player);
-		$window.location.href = "#!/aboutUs";
-	}
-
-	$scope.storyFeed = function() {
-		$interval.cancel($rootScope.trackUser);
-    	$interval.cancel($rootScope.player);
-		$window.location.href = "#!/storyFeed";
-	}
-
 	$scope.splitter = function() {
 		  var menu = document.getElementById('menu');
 		  menu.open();
