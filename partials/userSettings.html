@@ -6,7 +6,7 @@
 			User
 			</ons-list-header>
 				<ons-list-item ng-click="profile()" tappable>
-					<p style="color: black; font-family: futura;">{{currentUser.username}}</p>
+					<p style="color: black; font-family: futura;">{{selUser.username}}</p>
 				</ons-list-item>
 			</ons-list>
 			<ons-list>
@@ -22,7 +22,7 @@
 				<ons-list-item ng-click="search()" tappable>
 					<p style="color: black; font-family: futura;">Search</p>
 				</ons-list-item>
-				<ons-list-item tappable>
+				<ons-list-item ng-click="userSettings()" tappable>
 					<p style="color: black; font-family: futura;">Settings</p>
 				</ons-list-item>
 				<ons-list-item ng-click="aboutUs()" tappable>
@@ -57,10 +57,10 @@
 			</ons-list>
 		</ons-page>
 	</ons-splitter-side>
-	<ons-splitter-content id="content" page="search.html"></ons-splitter-content>
+	<ons-splitter-content id="content" page="userSettings.html"></ons-splitter-content>
 </ons-splitter>
 
-<ons-template id="search.html">
+<ons-template id="userSettings.html">
 	<ons-page>
 		<ons-toolbar modifier="transparent">
 			<div class="left">
@@ -75,41 +75,36 @@
 				</ons-toolbar-button>
 			</div>
 		</ons-toolbar>
-		</br>
-		</br>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-			Search
-			</ons-list-header>
-			<ons-list-item style="height: 50px; color: black; font-family: futura;">
-				<ons-input ng-model="name" placeholder="Search for user/game"></ons-input>
-				<div class="right">
-					<ons-button ng-click="searchInfo(name)">Search</ons-button>
-				</div>
-			</ons-list-item>
-		</ons-list>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-				Users
-			</ons-list-header>
-			<ons-list-item style="height: 50px;" ng-repeat="user in searchedUser" tappable>
-				<div class="center" style="color: black; font-family: futura;" ng-click="getUser(user.id)">
-					{{user.username}}
-				</div>
-			</ons-list-item>
-		</ons-list>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-				Games
-			</ons-list-header>
-			<ons-list-item style="height: 50px;" ng-repeat="game in searchedGame" tappable>
-				<div class="center" style="color: black; font-family: futura;" ng-click="getGame(game.id)">
-					{{game.name}}
-				</div>
-			</ons-list-item>
-		</ons-list>
 
 
+			</br>
+			</br>
+		
+		<div style="width: 100%; text-align: center;">
+			<h4>User details</h4>
+		</div>
+		
+		<ons-list style="background-color: rgba(255, 255, 255, 0.8);">
+			<ons-list-header>Username</ons-list-header>
+			<ons-list-item style="color: white; font-family: futura;">
+				<ons-input modifier="transparent" ng-model="username" placeholder="{{currentUser.username}}"></ons-input>
+				<div class="right"><ons-button ng-click="changeUsername(username)" class="button button--light">Change</ons-button></div>
+			</ons-list-item>
+		</ons-list>
+		<ons-list style="background-color: rgba(255, 255, 255, 0.8);">
+			<ons-list-header>Email</ons-list-header>
+			<ons-list-item style="color: white; font-family: futura;">
+				<ons-input modifier="transparent" ng-model="email" placeholder="{{currentUser.email}}"></ons-input>
+				<div class="right"><ons-button ng-click="changeEmail(email)" class="button button--light">Change</ons-button></div>
+			</ons-list-item>
+		</ons-list>
+		<ons-list style="background-color: rgba(255, 255, 255, 0.8);">
+			<ons-list-header>Password</ons-list-header>
+			<ons-list-item style="color: white; font-family: futura;">
+				<ons-input modifier="transparent" ng-model="password" placeholder="{{currentUser.password}}"></ons-input>
+				<div class="right"><ons-button ng-click="changePassword(password)" class="button button--light">Change</ons-button></div>
+			</ons-list-item>
+		</ons-list>
 		</br>
 		</br>
 		</br>

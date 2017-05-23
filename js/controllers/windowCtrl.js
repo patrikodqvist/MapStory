@@ -1,11 +1,11 @@
 mapStory.controller('windowCtrl', function($window,$rootScope,$scope, Pubnub, currentUser, loginService, gameModel, firebase, $interval) {	
-	if ($rootScope.currentUser) {
+	/*if ($rootScope.currentUser) {
 
 	}
 	else {
 		$window.location.href = "#!/login"
 		$window.location.reload();
-	}
+	}*/
 
 	$rootScope.playSound = false;
 	$rootScope.inGame = false;
@@ -16,6 +16,17 @@ mapStory.controller('windowCtrl', function($window,$rootScope,$scope, Pubnub, cu
 		loginService.gameSearch(name);
 	}
 
+	$scope.getUser = function(id) {
+		loginService.getUser(id);
+		$window.location.href = "#!/profile";
+	}
+
+	$scope.getGame = function(id) {
+		loginService.getGame(id);
+		$window.location.href = "#!/searchedGame";
+	}
+
+
 	$scope.home = function() {
 		$window.location.href = "#!/home";
 	}
@@ -24,6 +35,18 @@ mapStory.controller('windowCtrl', function($window,$rootScope,$scope, Pubnub, cu
 	}
 	$scope.search = function() {
 		$window.location.href = "#!/search";
+	}
+
+	$scope.userSettings = function() {
+		$window.location.href = "#!/userSettings";
+	}
+
+	$scope.aboutUs = function() {
+		$window.location.href = "#!/aboutUs";
+	}
+
+	$scope.storyFeed = function() {
+		$window.location.href = "#!/storyFeed";
 	}
 
 	$scope.splitter = function() {
@@ -37,5 +60,18 @@ mapStory.controller('windowCtrl', function($window,$rootScope,$scope, Pubnub, cu
     	}
     	loginService.logout();
     	
+    }
+
+    $scope.changeUsername = function(username) {
+    	loginService.changeUsername(username);
+    	$window.alert('Username changed to ' + username + '!');
+    }
+    $scope.changeEmail = function(email) {
+    	loginService.changeEmail(email);
+    	$window.alert('Email changed to ' + email + '!');
+    }
+    $scope.changePassword = function(password) {
+    	loginService.changePassword(password);
+    	$window.alert('Password changed to ' + password + '!');
     }
 });

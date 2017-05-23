@@ -22,7 +22,7 @@
 				<ons-list-item ng-click="search()" tappable>
 					<p style="color: black; font-family: futura;">Search</p>
 				</ons-list-item>
-				<ons-list-item tappable>
+				<ons-list-item ng-click="userSettings()" tappable>
 					<p style="color: black; font-family: futura;">Settings</p>
 				</ons-list-item>
 				<ons-list-item ng-click="aboutUs()" tappable>
@@ -57,10 +57,10 @@
 			</ons-list>
 		</ons-page>
 	</ons-splitter-side>
-	<ons-splitter-content id="content" page="search.html"></ons-splitter-content>
+	<ons-splitter-content id="content" page="aboutUs.html"></ons-splitter-content>
 </ons-splitter>
 
-<ons-template id="search.html">
+<ons-template id="aboutUs.html">
 	<ons-page>
 		<ons-toolbar modifier="transparent">
 			<div class="left">
@@ -75,41 +75,35 @@
 				</ons-toolbar-button>
 			</div>
 		</ons-toolbar>
-		</br>
-		</br>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-			Search
-			</ons-list-header>
-			<ons-list-item style="height: 50px; color: black; font-family: futura;">
-				<ons-input ng-model="name" placeholder="Search for user/game"></ons-input>
-				<div class="right">
-					<ons-button ng-click="searchInfo(name)">Search</ons-button>
-				</div>
+		
+		<ons-list style="background-color: rgba(255, 255, 255, 0.7);" >
+			<ons-list-header>About us</ons-list-header>
+			<ons-list-item style="font-family: futura;">
+				<p style="color: black;">This application was made by Patrik Odqvist, Dui Ardal and Gustav Frisk Arfvidsson.</p>
 			</ons-list-item>
-		</ons-list>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-				Users
-			</ons-list-header>
-			<ons-list-item style="height: 50px;" ng-repeat="user in searchedUser" tappable>
-				<div class="center" style="color: black; font-family: futura;" ng-click="getUser(user.id)">
-					{{user.username}}
-				</div>
+			<ons-list-item style="font-family: futura;">
+				<p style="color: black;">
+				Welcome to the most innovative story-telling game in the world! In this game, you can make original, innovatice stories with friends and users around you.
+				</br>
+				</br>
+				To start, simply log in and you will be redirected to the home page. This page consists of a map where you yourself is centered. You can now see different games that are ongoing. They look like blue circles on the map. To join in on a game, you simply tap the red marken in the middle of the blue circle. You will have to know the hosts password to join.
+				</br>
+				</br>
+				If you want to create your own game, simply press the button below the map and fill out the details. For example, you can choose the amount of words in your story, number of people that can join and how big the range of people nearby can join is going to be.
+				</br>
+				</br>
+				If you are interested in looking at your previous stories from your former games, simply press the burger-menu in the top-left corner and press "Profile". You can also search for other users and watch their stories from the same burger-menu in the "Search"-tab.
+				</br>
+				</br>
+				We hope you will enjoy this game and make some funky stories!
+				</br>
+				</br>
+				Best regards,</br>
+				Patrik, Dui and Gustav.</p>
 			</ons-list-item>
+		
+		
 		</ons-list>
-		<ons-list style="background-color: rgba(255,255,255, 0.8);" modifier="noborder">
-			<ons-list-header>
-				Games
-			</ons-list-header>
-			<ons-list-item style="height: 50px;" ng-repeat="game in searchedGame" tappable>
-				<div class="center" style="color: black; font-family: futura;" ng-click="getGame(game.id)">
-					{{game.name}}
-				</div>
-			</ons-list-item>
-		</ons-list>
-
-
 		</br>
 		</br>
 		</br>
