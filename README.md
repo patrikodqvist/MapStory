@@ -1,5 +1,5 @@
-# mapStory
-Project work Mobilutvecklingsteknik
+# MapStory
+Project work DM2518 Mobilutvecklingsteknik
 by Patrik Odqvist, Dui Ardal, Gustav Frisk Arfvidsson
 
 Code live at:
